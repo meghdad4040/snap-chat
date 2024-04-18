@@ -15,7 +15,7 @@ export const authConfig = {
 			request: NextRequest;
 		}) {
 			const user = auth?.user;
-			console.log("auth: " + user);
+			// console.log("auth: " + JSON.stringify(user));
 			const isVisitingChatPage = request.nextUrl.pathname.startsWith("/chat");
 
 			const isVisitingAuthPage =

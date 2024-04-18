@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/shared/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -7,7 +6,7 @@ import { auth } from "@/auth";
 
 export default async function Home() {
  const session = await auth();
- console.log("session: "+session)
+ // console.log("session: "+ JSON.stringify(session))
  return (
   <div className="flex bg-[#fffc00] dark:bg-black ">
    <div className=" min-h-screen flex flex-col items-center justify-center w-full max-w-4xl mx-auto">

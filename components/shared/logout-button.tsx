@@ -1,12 +1,13 @@
 import { LogOut } from "lucide-react";
 import { Button } from "../ui/button";
-import { signOut } from "@/auth";
+import { logoutAction } from "@/lib/action";
 
 const LogoutButton = () => {
- const logoutAction = async () => {
-  "use server";
-  await signOut();
- }
+ // const logoutAction = async () => {
+ //  "use server";
+ //  await signOut();
+ // }
+
  return (
   <form action={logoutAction} >
    <Button className='bg-black text-white rounded-full p-3 text-xs md:text-sm'>
