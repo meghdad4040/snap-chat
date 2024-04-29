@@ -76,5 +76,3 @@ const Chat = ({ chat }: ChatProps) => {
 	);
 };
 export default Chat;
-
-
