@@ -36,23 +36,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			if (account?.provider === "github") {
 				await connectToMongoDB();
 
-				try {
-					const user = await User.findOne({ email: profile?.email });
-
-					//signup the user if not found
-					if (!user) {
-						const newUser = await User.create({
-							username: profile?.login,
-							email: profile?.email,
-							fullName: profile?.name,
-							avatar: profile?.avatar_url,
-						});
-						await newUser.save();
+				if (profile?.email) {
+					// Check if email exists before using it
+					try {
+						const user = await User.findOne({ email: profile?.email });
+						//signup the user if not found
+						if (!user) {
+							const newUser = await User.create({
+								username: profile?.login,
+								email: profile?.email,
+								fullName: profile?.name,
+								avatar: profile?.avatar_url,
+							});
+							await newUser.save();
+						}
+						return true; // indicate successful sign-in
+					} catch (error) {
+						console.log(error);
+						return false; // indicate failed sign-in
 					}
-					return true; // indicate successful sign-in
-				} catch (error) {
-					console.log(error);
-					return false; // indicate failed sign-in
+				} else {
+					console.log("Profile email not found. User cannot be created.");
+					return false; // Indicate failed sign-in with a specific message
 				}
 			}
 			return false; // indicate failed sign-in
